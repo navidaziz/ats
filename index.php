@@ -29,8 +29,8 @@ date_default_timezone_set('Asia/Karachi');
  * By default development will show errors but testing and live will hide them.
  */
 
-if (defined('development'))
-{
+//if (defined('development'))
+//{
 	switch (ENVIRONMENT)
 	{
 		case 'development':
@@ -49,7 +49,7 @@ if (defined('development'))
 		default:
 			exit('The application environment is not set correctly.');
 	}
-}
+//}
 
 /*
  *---------------------------------------------------------------
