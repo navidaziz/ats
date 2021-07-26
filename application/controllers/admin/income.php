@@ -139,10 +139,10 @@ class Income extends Admin_Controller
 		//             AND `income`.`status` IN (0, 1)
 		//             AND `users`.`status`= 1
 		//             GROUP BY `users`.`user_title`";
-		$query = "SELECT * FROM `emplyees_report_view`";
+		// $query = "SELECT * FROM `emplyees_report_view`";
 
-		$result = $this->db->query($query);
-		$this->data['today_user_entries'] = $result->result();
+		// $result = $this->db->query($query);
+		// $this->data['today_user_entries'] = $result->result();
 
 
 
