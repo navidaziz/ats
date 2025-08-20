@@ -172,7 +172,7 @@ class Sms extends Admin_Controller{
 		        $priority = 0;
 		     }
 		    
-		    $message = $this->db->escape(ucwords(strtolower(substr($mobile_number->name, 0, 13)))." Dear, ".$this->input->post("message"));
+		    $message = $this->db->escape(ucwords(strtolower(substr($mobile_number->name, 0, 12))).", ".$this->input->post("message"));
 			$query="INSERT INTO `sms`(`message`, `mobile_number`, `priority`, `len`) 
 			VALUES (".$message.", '".$mobile_number->mobile_number."', '".$priority."', '".strlen($message)."' );";
 			 $this->db->query($query);

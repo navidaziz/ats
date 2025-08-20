@@ -425,7 +425,7 @@ AND  MONTH(`expenses`.`created_date`) = '" . $month . "' GROUP BY `expense_types
 				          OR `income`.`invoice_number` LIKE "%' . $search . '%"';
 		} else {
 
-			if ($this->session->userdata['user_id'] == 10) {
+			if ($this->session->userdata['user_id'] == 10 or $this->session->userdata['user_id'] == 18) {
 
 				$where = "`income`.`status` IN (0, 1) AND DATE(`income`.`created_date`) = '" . $today . "'";
 			} else {
@@ -434,7 +434,8 @@ AND  MONTH(`expenses`.`created_date`) = '" . $month . "' GROUP BY `expense_types
 		}
 
 
-		$data = $this->income_model->get_income_list($where);
+		$data = $this->income_model->get_income_list($where,false);
+		//var_dump($data);
 
 		//get uesr 
 
@@ -446,7 +447,7 @@ AND  MONTH(`expenses`.`created_date`) = '" . $month . "' GROUP BY `expense_types
 			$user_list[$user->user_id] = $user->user_title;
 		}
 		$this->data['user_list'] = $user_list;
-		$this->data["income"] = $data->income;
+		$this->data["income"] = $data;
 		$this->data["pagination"] = $data->pagination;
 		$this->data["title"] = $this->lang->line('Income');
 
