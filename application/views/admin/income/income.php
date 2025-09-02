@@ -346,7 +346,7 @@
         </div>
       </div>
 
-      <?php if ($this->session->userdata['user_id'] == 18) { ?>
+      <?php if ($this->session->userdata['user_id'] == 18 or 1 == 1) { ?>
         <div class="box border blue" id="messenger">
           <div class="box-title">
             <h4 class="pull-left">Search</h4>
@@ -364,7 +364,7 @@
               <div class="form-group">
                 <label for="exampleInputEmail1">Search</label>
                 <input class="form-control" <?php if ($this->input->post("search")) { ?> value="<?php echo $this->input->post("search"); ?>" <?php } ?> name="search" type="text" id="search" placeholder="Search here" required>
-                <button type="submit">Search</button>
+                <button class="btn btn-success" type="submit">Search</button>
               </div>
 
 
