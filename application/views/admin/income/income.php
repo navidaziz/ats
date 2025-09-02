@@ -488,7 +488,7 @@
                   <tr>
                     <td><?php echo $count++; ?></td>
                     <td><?php echo $income->invoice_number; ?></td>
-                    <td><?php echo strtotime('d M, y', strtotime($income->created_date)); ?></td>
+                    <td><?php echo date('d M, y', strtotime($income->created_date)); ?></td>
                     <td><?php echo $income->customer_name; ?></td>
                     <td><?php echo $income->customer_mobile_number; ?></td>
                     <!--<td><?php echo $income->customer_address; ?></td>-->
