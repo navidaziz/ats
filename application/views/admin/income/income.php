@@ -363,7 +363,7 @@
 
               <div class="form-group">
                 <label for="exampleInputEmail1">Search</label>
-                <input <?php if ($this->input->post("search")) { ?> value="<?php echo $this->input->post("search"); ?>" <?php } ?> name="search" type="text" id="search" placeholder="Search here" required>
+                <input class="form-control" <?php if ($this->input->post("search")) { ?> value="<?php echo $this->input->post("search"); ?>" <?php } ?> name="search" type="text" id="search" placeholder="Search here" required>
                 <button type="submit">Search</button>
               </div>
 
@@ -387,7 +387,7 @@
                                                                           echo date("Y-m-d", time());
                                                                         } ?>" class="form-control" style="" required="required" title="End Date" placeholder="End Date">
               </div>
-              <button type="submit" name="date_search" value="date_search">Search</button>
+              <button class="btn btn-success" type="submit" name="date_search" value="date_search">Search</button>
             </form>
 
 
@@ -464,6 +464,7 @@
                 <tr>
                   <th>#</th>
                   <th>Invoice No.</th>
+                  <th>Date</th>
                   <th><?php echo $this->lang->line('customer_name'); ?></th>
                   <th><?php echo $this->lang->line('customer_mobile_number'); ?></th>
                   <!--<th><?php echo $this->lang->line('customer_address'); ?></th>-->
@@ -487,6 +488,7 @@
                   <tr>
                     <td><?php echo $count++; ?></td>
                     <td><?php echo $income->invoice_number; ?></td>
+                    <td><?php echo strtotime('d M, y', strtotime($income->created_date)); ?></td>
                     <td><?php echo $income->customer_name; ?></td>
                     <td><?php echo $income->customer_mobile_number; ?></td>
                     <!--<td><?php echo $income->customer_address; ?></td>-->
