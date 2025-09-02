@@ -409,32 +409,38 @@ AND  MONTH(`expenses`.`created_date`) = '" . $month . "' GROUP BY `expense_types
 	{
 
 
-		//check for search here .......
 
 
+		$today = date("Y-m-d");
 
-		/// end here ..................
-
-
-		$today = date("Y-m-d", time());
+		$start_date = $this->input->post("start_date");
+		$end_date   = $this->input->post("end_date");
 
 		if ($this->input->post("search")) {
 			$search = $this->input->post("search");
-			$where = '`income`.`customer_mobile_number` LIKE "%' . $search . '%" 
-				          OR `income`.`customer_name`LIKE "%' . $search . '%"
-				          OR `income`.`invoice_number` LIKE "%' . $search . '%"';
+			$where = "`income`.`customer_mobile_number` LIKE '%" . $this->db->escape_like_str($search) . "%' 
+              OR `income`.`customer_name` LIKE '%" . $this->db->escape_like_str($search) . "%'
+              OR `income`.`invoice_number` LIKE '%" . $this->db->escape_like_str($search) . "%'";
 		} else {
-
-			if ($this->session->userdata['user_id'] == 10 or $this->session->userdata['user_id'] == 18) {
-
-				$where = "`income`.`status` IN (0, 1) AND DATE(`income`.`created_date`) = '" . $today . "'";
+			// If date range is provided, use that
+			if (!empty($start_date) && !empty($end_date)) {
+				$date_condition = "DATE(`income`.`created_date`) BETWEEN '" . $start_date . "' AND '" . $end_date . "'";
 			} else {
-				$where = "`income`.`status` IN (0, 1) AND DATE(`income`.`created_date`) = '" . $today . "' and `income`.`created_by` = " . $this->session->userdata['user_id'];
+				// Default to today's records
+				$date_condition = "DATE(`income`.`created_date`) = '" . $today . "'";
+			}
+
+			if ($this->session->userdata['user_id'] == 10 || $this->session->userdata['user_id'] == 18) {
+				$where = "`income`.`status` IN (0, 1) AND " . $date_condition;
+			} else {
+				$where = "`income`.`status` IN (0, 1) AND " . $date_condition .
+					" AND `income`.`created_by` = " . (int)$this->session->userdata['user_id'];
 			}
 		}
 
 
-		$data = $this->income_model->get_income_list($where,false);
+
+		$data = $this->income_model->get_income_list($where, false);
 		//var_dump($data);
 
 		//get uesr 
